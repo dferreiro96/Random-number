@@ -1,49 +1,94 @@
-"""
-el numero oculto
-"""
+''' adivinar numero y mostrar en lista'''
+
 import random
-historial= []
-print("Este es un jueo dende se enumera un número aleatorio y UD deberá intentar adivinarlo. ")
-print("Entre qué números quiere que se encuentre el numero aleatorio?")
-limite_inferior= int(input(( "Límite inferior: ")))
-limite_superior= int(input(("Límite superior: ")))
-while limite_superior<= limite_inferior:
-    print("El límite superior no puede ser menor ni iual que el límite inferior")
-    limite_inferior= int(input(( "Límite inferior: ")))
-    limite_superior= int(input(("Límite superior: ")))
-    
-aleatorio= random.randint(limite_inferior,limite_superior)
-
-intentos= 0
-num= int(input(f"Se ha enerado un número aleatorio entre {limite_inferior} y {limite_superior}. Intente adiinarlo: \n"))
-
+lista=[]
+print("""Este juego consiste en lo siguiente:
+	 \n\tSe le pedirán dos números entre los cuales usted quiere que el programa genere un número aleatorio. Luego, usted tratará de adivinar el número generado por
+el programa.""")
+print()
 while True:
- intentos +=1
- if num  < limite_inferior or num > limite_superior:
-     num= int(input(("Introdujo un número fuera del rano. Intente nueamente:")))
-     continue
- elif limite_inferior> limite_superior:
-     num= int(input(("El límite inferior no puede ser mayor que el límite superior. Intente nueamente:")))
-     continue
+	contador=0
+	while True:
+		try:
+			lim_inf =int(input("\nIntroduzca el primer número: "))
+		except ValueError:
+			print("\n Debe introducir un número")
+			continue
+		break
+	while True:
+		try:
+			lim_sup= int(input("Introduzca el segundo número: "))
+		except ValueError:
+			print("\nDebe introducir un número")
+			continue
+		break
 
 
- if num < aleatorio:
-       num=int(input(("El nùmero que ud introdujo es menor. Intente nueamente: ")))
- elif aleatorio < num:
-       num= int(input(("El nùmero que ud introdujo es mayor. Intente nueamente: ")))
+	while lim_inf>lim_sup or lim_inf== lim_sup:
+		print("""\nEl límite inferior no puede ser ni mayor ni igual que el límite superior.\n""")
+		while True:
+			try:
+				lim_inf =int(input("Introduzca el primer número: "))
+			except ValueError:
+				print("Debe introducir un número")
+				continue
+			break
+		while True:
+			try:
+				lim_sup= int(input("Introduzca el segundo número: "))
+			except ValueError:
+				print("Debe introducir un número")
+				continue
+			break
 
- else:
-       print(f"FELICIDADES!! Lo ha alcanzado en {intentos} intentos.") 
-       
-       partida={
-           "Intentos": intentos, 
-           "Número": aleatorio,
-           "Rano": {f"limite_inferior - limite_superior"}
-       }
-       historial.append(partida)
-       
-       print("\n--- HISTORIAL ---")
-       for i, p in enumerate(historial, 1):
-            print(f"Partida {i}: Número {p['Número']} en {p['Intentos']} intentos (rango {p['Rano']})")
-            print("¡Gracias por jugar!")
-       break
+	aleat= random.randint(lim_inf, lim_sup)
+
+	
+	while True:
+		try:
+			num=int(input(f"\nBien, ahora introduzca un número entre {lim_inf} y {lim_sup}: "))
+		
+		except ValueError:
+			print("Debe introducir un número. ")
+			continue
+		break
+	
+	
+	
+	while num!= aleat:
+			contador += 1
+			lista.append(num)
+			if num > aleat:
+				while True:
+					try:
+						num= int(input ("\nEl numero es MENOR. Introduzca otro: "))
+					except ValueError:
+						print("Debe introducir un numero.")
+						continue
+					break
+			else:
+				while True:
+					try:
+						num=int(input ("\nEl numero es MAYOR. Introduzca otro: "))
+					except ValueError:
+						print("Debe introducir un número")
+						continue
+					break
+	
+	contador +=1	
+	lista.append(num)				
+	print(f"\nFELICIDADES. El número es {aleat}. Lo logró en {contador} intentos.")
+
+		
+	salir= input("\n¿Desea jugar de nuevo? (s/n) ") .lower() .strip()
+	while salir != "s" and salir != "n":
+		salir= input("\nIntroduzca 's' para jugar nuevamente o 'n' para salir del programa: ") .lower() .strip()
+		break		
+	if salir != "s":
+		print(f"""\n Los números introducidos en toda la sesión fueron: 
+		\n{lista}""")
+		print()
+		print("\nHasta luego")
+		break
+	
+	
