@@ -4,6 +4,15 @@ A Python guessing game where the computer generates a random number and the play
 
 Un juego de adivinanzas en Python donde la computadora genera un número aleatorio y el jugador intenta adivinarlo.
 
+## Example
+
+- Introduzca el primer número: 1
+- Introduzca el segundo número: 100
+- Bien, ahora introduzca un número entre 1 y 100: 50
+- El numero es MENOR. Introduzca otro: 25
+- El numero es MAYOR. Introduzca otro: 37
+- FELICIDADES. El número es 37. Lo logró en 3 intentos.
+
 ## Features / Funcionalidades
 
 - Random number generation with `random.randint()` / Generación de número aleatorio con `random.randint()`
